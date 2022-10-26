@@ -1,179 +1,80 @@
 #include <stdio.h>
-/**
- * Ham Swap (Sap Xiep)
- * Ham SelectionSort (Sap Xiep Chon)
- * Ham InsertSort (Sap Xiep Chen)
- * Ham  BubbleSort (Sap Xiep Noi Bot)
- */
+#include <malloc.h>
 
-/* Swap */
-void Swap(int *x, int *y)
+typedef int KeyType;
+typedef float otherType;
+typedef struct
 {
-    int temp = *x;
+    KeyType key;
+    otherType otherfields;
+} recordType;
+
+/* ham Swap (O1) */
+void Swap(recordType *x, recordType *y)
+{
+    recordType temp;
+    temp = *x;
     *x = *y;
     *y = temp;
 }
-void XuatMang(int a[], int n)
+
+/* Sap xiep chon (On2)*/
+void selectionSort(recordType a[], int n)
 {
-    int i, j;
+    int i, j, lowindex;
+    KeyType lowkey;
+    for (i = 0; i < n - 2; i++)
+    {
+        lowkey = a[i].key;
+        lowindex = i;
+        for (j = i + 1; j < n - 1; j++)
+        {
+            if (a[j].key < lowkey)
+            {
+                lowkey = a[j].key;
+                lowindex = i;
+            }
+            Swap(&a[i], &a[lowindex]);
+        }
+    }
+}
+
+/*doc file vao mang*/
+void docFile(recordType a[], int *n)
+{
+    FILE *f;
+    f = fopen("data.txt", "r"); /*mo de doc file data.txt*/
+    int i = 0;
+    if (f != NULL)       /* neu file f khong rong */
+        while (!feof(f)) /* trong khi chua ket thuc tap tin */
+        {
+            fscanf(f, "%d%f", &a[i].key, &a[i].otherfields); /* doc tung dong */
+            i++;
+        }
+    else
+        printf("Loi mo File!\n");
+    fclose(f); /* doc xong dong file lai*/
+    *n = i;    /* xac dinh so phan tu cua mang a */
+}
+/*in mang */
+void inMang(recordType a[], int n)
+{
+    int i;
     for (i = 0; i < n; i++)
     {
-        for (j = 0; j < i; j++)
-            printf("   ");
-
-        for (j = i; j < n; j++)
-            printf("%d ", a[j]);
-
-        printf("\n");
-    }
-}
-/* SelectionSort */
-void SelectionSort(int a[], int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-
-        int index = i;
-        for (int j = i + 1; j < n; j++)
-        {
-
-            if (a[j] < a[index])
-            {
-                index = j;
-            }
-        }
-        if (i == 0)
-        {
-
-            for (int j = i - 1; j < n; j++)
-            {
-                if (j == -1)
-                {
-                    printf("");
-                }
-                else
-                {
-                    printf("%-d      ", a[j]);
-                }
-            }
-        }
-        else if (i == 1)
-        {
-
-            for (int j = i - 1; j < n; j++)
-            {
-
-                printf("%-d      ", a[j]);
-            }
-        }
-        else
-        {
-            for (int j = 0; j <= i - 2; j++)
-                printf("        ");
-            for (int j = i - 1; j < n; j++)
-            {
-
-                printf("%d      ", a[j]);
-            }
-        }
-
-        if (index != i)
-        {
-            Swap(&a[i], &a[index]);
-        }
-
-        printf("\n");
-    }
-    printf("----------------\n\n");
-    printf("Ket qua:");
-    for (int i = 0; i < n; i++)
-    {
-        printf(" %d ", a[i]);
-    }
-}
-
-/* InsertSort */
-void InsertSort(int a[], int n)
-{
-    printf("       ");
-    for (int i = 0; i < n; i++)
-    {
-        printf("  %d", a[i]);
-    }
-    printf("\n");
-    for (int i = 1; i < n; i++)
-    {
-        int key = a[i];
-        int j = i - 1;
-
-        while (j >= 0 && a[j] > key)
-        {
-            a[j + 1] = a[j];
-            j = j - 1;
-        }
-
-        a[j + 1] = key;
-        for (j = 0; j <= i; j++)
-        {
-            if (j == 0)
-            {
-                printf("         %d", a[0]);
-            }
-            else
-                printf(" %d ", a[j]);
-        }
-        printf("\n");
-    }
-    printf("Ket qua:");
-    for (int i = 0; i < n; i++)
-    {
-        printf(" %d ", a[i]);
-    }
-}
-/* BubbleSort */
-void BubbleSort(int a[], int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n - 1; j++)
-        {
-
-            if (a[j] > a[j + 1])
-            {
-                Swap(&a[j], &a[j + 1]);
-            }
-        }
-    }
-    printf("Ket qua:");
-    for (int i = 0; i < n; i++)
-    {
-        printf(" %d ", a[i]);
+        printf("%3d%5f%8.2f\n", i + 1, a[i].key, a[i].otherfields);
     }
 }
 
 int main()
 {
-    int arr[] = {50, 143, 0, 10, 10, 120, 90, 10, 90, 140, 20, 30};
-    char a[] = "SelectionSort";
-    char b[] = "InsertionSort";
-    char c[] = "BubbleSort";
-    int n = sizeof(arr) / sizeof(arr[0]);
-    /* FILE *f = fopen("data.txt", "w");
-    fprintf(f, "Mang ban dau = { ");
-    for (int i = 0; i < n; i++)
-    {
-        fprintf(f, "%d ", arr[i]);
-    }
-    fprintf(f, "}\n");
-    fprintf(f, "%s \n", a);
-    fprintf(f, "%s\n", b);
-    fprintf(f, "%s\n", c);
-    fclose(f); */
-    /* SelectionSort(arr, n);
-    printf("\n----------------------------\n"); */
-    /*\\ InsertSort(arr, n); */
-    BubbleSort(arr, n);
-    /* xuatmang(a, n); */
-
-    return 0;
+    recordType a[100];
+    int n;
+    docFile(a, &n);
+    printf("Du lieu ban dau: \n");
+    inMang(a, n);
+    /* selectionSort(a, n);
+    printf("Ket qua sau khi sap xiep chon: ");
+    inMang(a, n);
+    return 0; */
 }
