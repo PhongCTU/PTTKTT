@@ -5,8 +5,8 @@
 // Cau truc Tien
 typedef struct
 {
-    char tenTien[25];
-    int menhGia, PA;
+    char tenTien[25]; // ten tien
+    int menhGia, PA;  // menh gia
 } Tien;
 
 // doc file ATM.txt
