@@ -10,10 +10,10 @@ typedef struct
     int Phuong_An;    // So phuong an duoc chon
 } DoVat;
 
-DoVat *Read_File(float *W, int *n)
+DoVat *Read_File(char file_name[], float *W, int *n)
 {
     FILE *f;
-    f = fopen("D:/PTTKTT/Thaman/balo1.txt", "r"); // mo file de doc
+    f = fopen(file_name, "r");                    // mo file de doc
     fscanf(f, "%f", W);                           // Xac dinh trong luong Ba lo
     DoVat *dsdv = (DoVat *)malloc(sizeof(DoVat)); // khoi tao mot danh sach do vat
     int i = 0;
@@ -56,17 +56,17 @@ void in_dsdv(DoVat *dsdv, int n, float W)
     float TongTL = 0.0, TongGT = 0.0; // khoi ta tong gia tri va tong trong luong = 0
     printf("\nPhuong an Cai Ba lo 1 dung thuat toan THAM AN nhu sau:\n");
     printf("\nTrong luong cua ba lo = %-9.2f\n", W);
-    printf("|---|------------------|---------|---------|---------|-----------|\n");
-    printf("|STT|     Ten Do Vat   | T Luong | Gia Tri | Don Gia | Phuong an |\n");
-    printf("|---|------------------|---------|---------|---------|-----------|\n");
+    printf("|---|--------------------|---------|---------|---------|-----------|\n");
+    printf("|STT|     Ten Do Vat     | T Luong | Gia Tri | Don Gia | Phuong an |\n");
+    printf("|---|--------------------|---------|---------|---------|-----------|\n");
     for (i = 0; i < n; i++)
     {
-        printf("|%2d |%-18s|%9.2f|%9.2f|%9.2f|%6d     |\n",
+        printf("|%2d |%-20s|%9.2f|%9.2f|%9.2f|%6d     |\n",
                i + 1, dsdv[i].TenDV, dsdv[i].TL, dsdv[i].GT, dsdv[i].DG, dsdv[i].Phuong_An);
         TongTL = TongTL + dsdv[i].Phuong_An * dsdv[i].TL;
         TongGT = TongGT + dsdv[i].Phuong_An * dsdv[i].GT;
     }
-    printf("|---|------------------|---------|---------|---------|-----------|\n");
+    printf("|---|--------------------|---------|---------|---------|-----------|\n");
     printf("Phuong an (theo thu tu DG giam dan): X(");
     for (i = 0; i < n - 1; i++)
     {
@@ -89,7 +89,7 @@ int main()
     int n;
     float W;
     DoVat *dsdv;
-    dsdv = Read_File(&W, &n);
+    dsdv = Read_File("D:/PTTKTT/Thaman/balo2.txt", &W, &n);
     BubbleSort(dsdv, n);
     greedy(dsdv, n, W);
     in_dsdv(dsdv, n, W);
