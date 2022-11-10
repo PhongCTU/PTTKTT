@@ -78,7 +78,8 @@ void in_dsdv(DoVat *dsdv, int n, float W)
 }
 void greedy(DoVat *dsdv, int n, float W)
 {
-    for (int i = 0; i < n; i++)
+	int i;
+    for ( i = 0; i < n; i++)
     {
         dsdv[i].Phuong_An = (W / dsdv[i].TL);   // phuong an = phan nguyen cua trong luong cua balo / trong luong do vat
         W = W - dsdv[i].Phuong_An * dsdv[i].TL; // trong luong con lai cua balo = phuong an * trong luong cua vat.
@@ -89,7 +90,7 @@ int main()
     int n;
     float W;
     DoVat *dsdv;
-    dsdv = Read_File("D:/PTTKTT/Thaman/balo2.txt", &W, &n);
+    dsdv = Read_File("balo1.txt", &W, &n);
     BubbleSort(dsdv, n);
     greedy(dsdv, n, W);
     in_dsdv(dsdv, n, W);
