@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define size 30 // Toi thieu la 30 thanh pho
+#define max 30 // Toi thieu la 30 thanh pho
 
 // Cau truc cua mot canh
 typedef struct
@@ -8,7 +8,7 @@ typedef struct
     int dau, cuoi; // Diem dau va cuoi cua canh
 } Canh;
 
-void Read_File(char file_name[], Canh a[], int *n) // Doc file vao mang canh a voi n phan tu
+void readData(char file_name[], Canh a[], int *n) // Doc file vao mang canh a voi n phan tu
 {
     int i, j, t;
     float temp;
@@ -153,8 +153,8 @@ void greedy(Canh ds_canh[], int n, Canh Phuong_An[]) // danh sach tat ca cac can
 int main()
 {
     int n;
-    Canh a[size];
-    Read_File("D:/PTTKTT/Thaman/TPS2.txt", a, &n);
+    Canh a[max];
+    readData("TSP2.txt", a, &n);
     printf("Danh sach mang:\n");
     in_ds_canh(a, n * (n - 1) / 2, 0);
     BubbleSort(a, n * (n - 1) / 2);
