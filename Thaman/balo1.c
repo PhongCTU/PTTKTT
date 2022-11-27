@@ -31,7 +31,7 @@ void bubbleSort(Dovat *dsdv, int n)
 Dovat *readData(float *W, int *n) // trong luong cai balo W, so luong do vat n
 {
     FILE *f;
-    f = fopen("balo3.txt", "r");                  // mo file de doc
+    f = fopen("balo1.txt", "r");                  // mo file de doc
     fscanf(f, "%f", W);                           // Xac dinh trong luong Ba lo
     Dovat *dsdv = (Dovat *)malloc(sizeof(Dovat)); // khoi tao mot danh sach do vat
     int i = 0;
@@ -51,7 +51,7 @@ void in_dsdv(Dovat *dsdv, int n, float W)
 {
     int i;
     float TongTL = 0.0, TongGT = 0.0; // khoi ta tong gia tri va tong trong luong = 0
-    printf("\n********* Phuong an Cai Ba lo 3 dung thuat toan THAM AN nhu sau: **********\n");
+    printf("\nPhuong an Cai Ba lo 1 dung thuat toan THAM AN nhu sau:\n");
     printf("\nTrong luong cua ba lo = %-9.2f\n", W);
     printf("|---|--------------------|---------|---------|---------|-----------|\n");
     printf("|STT|     Ten Do Vat     | T Luong | Gia Tri | Don Gia | Phuong an |\n");
@@ -69,13 +69,7 @@ void in_dsdv(Dovat *dsdv, int n, float W)
     {
         printf("%d,", dsdv[i].PA);
     }
-    printf("%d)\n", dsdv[n - 1].PA);
-    printf("Do vat (theo thu tu DG giam dan):");
-    for (i = 0; i < n - 1; i++)
-    {
-        printf("%s ->", dsdv[i].TenDV);
-    }
-    printf("%s", dsdv[n - 1].TenDV);
+    printf("%d)", dsdv[n - 1].PA);
     printf("\nTong trong luong = %-9.2f\n", TongTL);
     printf("Tong gia tri = %-9.2f\n", TongGT);
 }
@@ -83,9 +77,7 @@ void thaman(Dovat *dsdv, int n, float W)
 {
     for (int i = 0; i < n; i++)
     {
-        dsdv[i].PA = W / dsdv[i].TL; // phuongan[i] = div trong luong balo con lai voi trong luong dovat[i]
-        if (dsdv[i].PA > 1)
-            dsdv[i].PA = 1;
+        dsdv[i].PA = W / dsdv[i].TL;     // phuongan[i] = div trong luong balo con lai voi trong luong dovat[i]
         W = W - dsdv[i].PA * dsdv[i].TL; // w con lai  = w con lai - phuong an[i]*trongluong[i]
     }
 }
