@@ -53,7 +53,7 @@ void in_dsdv(Dovat *dsdv, int n, float W)
 {
     int i;
     float TongTL = 0.0, TongGT = 0.0; // khoi ta tong gia tri va tong trong luong = 0
-    printf("\nPhuong an Cai Ba lo 1 dung thuat toan THAM AN nhu sau:\n");
+    printf("\nPhuong an Cai Ba lo 3 dung thuat toan Nhanh Can nhu sau:\n");
     printf("\nTrong luong cua ba lo = %-9.2f\n", W);
     printf("|---|--------------------|---------|---------|---------|-----------|\n");
     printf("|STT|     Ten Do Vat     | T Luong | Gia Tri | Don Gia | Phuong an |\n");
